@@ -6,19 +6,19 @@
 
     Try changing "table" to "view" below
 */
-{{config(materialized='table',alias='first_model')}}
+{{config(materialized='table',alias='first_model_tbl')}}
 
 with source_data as (
 
-    select 1 as id
+    select 1 as id,'rt' as state,'2023-05-02' as updated_at
     union all
-    select null as id
+    select null as id,'CT' as state,'2023-04-23' as updated_at
     union all
-    select 3 as id
+    select 2 as id,'VT' as state,'2023-04-23' as updated_at
 
 )
 
-select *,{{var('my_first_variable')}} as first_variable
+select *
 from source_data
 
 /*
